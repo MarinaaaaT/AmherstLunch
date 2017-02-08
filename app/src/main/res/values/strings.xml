@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AmherstLunch</string>
+    <string name="app_name">Amherst College Life</string>
     <string name="loginButton">Login</string>
     <string name="registerButton">Register</string>
     <string name="edit_message1"> Username </string>
@@ -9,4 +9,7 @@
     <string name="name">Name</string>
     <string name="Username" />
     <string name="Password" />
+    <string name="Breakfast">Breakfast</string>
+    <string name="Lunch">Lunch</string>
+    <string name="Dinner">Dinner</string>
 </resources>

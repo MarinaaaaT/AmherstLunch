@@ -18,4 +18,10 @@ public class HomePage extends AppCompatActivity {
         Intent intent = getIntent();
     }
 
+    public void menuOpen(View view){
+
+        Intent intent = new Intent(this, DiningMenu.class);
+        startActivity(intent);
+    }
+
 }

@@ -75,6 +75,7 @@
         android:layout_below="@id/Name"
         android:layout_alignRight="@id/Name"
         android:text="Finish"
+        android:onClick="homeOpen"
         />
 
 

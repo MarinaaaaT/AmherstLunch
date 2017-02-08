@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/BreakfastT"
+        android:text="@string/Breakfast"
+        android:layout_marginTop="30dp"/>
+
+    <ExpandableListView
+        android:id="@+id/Breakfast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/BreakfastT"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LunchT"
+        android:text="@string/Lunch"
+        android:layout_below="@id/Breakfast"/>
+
+    <ExpandableListView
+        android:id="@+id/Lunch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/LunchT"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/DinnerT"
+        android:text="@string/Dinner"
+        android:layout_below="@id/Lunch"/>
+
+
+    <ExpandableListView
+        android:id="@+id/Dinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/DinnerT"
+        />
+
+
+
+
+</RelativeLayout>

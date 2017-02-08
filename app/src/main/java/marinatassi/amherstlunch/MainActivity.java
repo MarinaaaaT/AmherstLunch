@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.*;
 import android.view.View;
+import java.io.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,19 +24,28 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void login(View view) {
+    public boolean existingUser(String us) throws IOException {
+        return true;
+    }
+
+    public boolean correctPassword(String pw) throws IOException{
+        return true;
+    }
+
+    public void login(View view) throws IOException {
 
         EditText username = (EditText) findViewById(R.id.editText1);
         EditText password = (EditText) findViewById(R.id.editText2);
         TextView loginFail = (TextView) findViewById(R.id.loginFail);
         Button register = (Button) findViewById(R.id.registerButton);
 
-        if (username.getText().toString().equals("admin") && password.getText().toString().equals("admin")) {
+        //correct username and password
+        if (existingUser(username.getText().toString()) && correctPassword(password.getText().toString())) {
             Intent intent = new Intent(this, HomePage.class);
             startActivity(intent);
-            //correct password
-        } else {
-            //wrong password
+        }
+        //wrong username or password
+        else {
             loginFail.setVisibility(View.VISIBLE);
         }
     }

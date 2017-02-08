@@ -19,6 +19,8 @@
         </activity>
         <activity android:name=".HomePage">
         </activity>
+        <activity android:name=".DiningMenu">
+        </activity>
     </application>
 
 </manifest>
