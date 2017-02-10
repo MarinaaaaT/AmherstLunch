@@ -61,7 +61,7 @@
         android:layout_height = "wrap_content"
         android:onClick = "login"
         android:text = "@string/loginButton"
-        android:layout_alignRight="@id/editText1"
+        android:layout_alignRight="@id/editText2"
         android:layout_below="@id/editText2"
         />
 
