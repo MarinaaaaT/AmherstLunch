@@ -18,14 +18,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        GetVal getV = new GetVal();
-        getV.execute();
     }
 
     public void keyboardAdjust(View view){
         //adjust padding to account for keyboard
         View parent = (View) view.getParent();
-
     }
 
     public static String[][] userData(String file){

@@ -1,23 +1,13 @@
 package marinatassi.amherstlunch;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.ExpandableListView.OnGroupClickListener;
-import android.widget.ExpandableListView.OnGroupCollapseListener;
-import android.widget.ExpandableListView.OnGroupExpandListener;
-import android.widget.Toast;
 
-import org.jsoup.nodes.Document;
-import org.jsoup.Jsoup;
 
 /**
  * Created by Marina on 2/7/17.
@@ -27,12 +17,25 @@ public class DiningMenu extends AppCompatActivity {
     ExpandableListView expListView;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
+    public static String[] valFood;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
         Intent intent = getIntent();
+        GetVal val = new GetVal();
+        val.execute(valFood);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            System.out.println("Interrupted");
+        }
+        System.out.println(valFood[0]);
+        if(valFood == null){
+            System.out.println("YOUR INTERNET CONNECTION IS THE PROBLEM! I was having this error earlier.");
+        }
+        //System.out.println(valFood[0]);
 
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.Food);
@@ -60,23 +63,29 @@ public class DiningMenu extends AppCompatActivity {
 
         // Adding child data
         List<String> Breakfast = new ArrayList<String>();
-        Breakfast.add("TESTBF");
+        int i = 0;
+        while(valFood[i] != null && i < valFood.length-1){
+            Breakfast.add(valFood[i]);
+            i++;
+        }
+        i++;
 
         List<String> Lunch = new ArrayList<String>();
-        Lunch.add("TESTL");
+        while(valFood[i] != null && i < valFood.length-1){
+            Lunch.add(valFood[i]);
+            i++;
+        }
+        i++;
 
         List<String> Dinner = new ArrayList<String>();
-        Dinner.add("TESTD");
+        while(valFood[i] != null && i < valFood.length-1){
+            Dinner.add(valFood[i]);
+            i++;
+        }
 
         listDataChild.put(listDataHeader.get(0), Breakfast); // Header, Child data
         listDataChild.put(listDataHeader.get(1), Lunch);
         listDataChild.put(listDataHeader.get(2), Dinner);
     }
 
-    public static Document getMenu() throws IOException{
-
-        Document valWeb = Jsoup.connect("https://www.amherst.edu/campuslife/housing-dining/dining/menu").get();
-        System.out.println(valWeb);
-        return valWeb;
-    }
 }
