@@ -1,5 +1,6 @@
 package marinatassi.amherstlunch;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,9 @@ import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.Toast;
+
+import org.jsoup.nodes.Document;
+import org.jsoup.Jsoup;
 
 /**
  * Created by Marina on 2/7/17.
@@ -67,5 +71,12 @@ public class DiningMenu extends AppCompatActivity {
         listDataChild.put(listDataHeader.get(0), Breakfast); // Header, Child data
         listDataChild.put(listDataHeader.get(1), Lunch);
         listDataChild.put(listDataHeader.get(2), Dinner);
+    }
+
+    public static Document getMenu() throws IOException{
+
+        Document valWeb = Jsoup.connect("https://www.amherst.edu/campuslife/housing-dining/dining/menu").get();
+        System.out.println(valWeb);
+        return valWeb;
     }
 }

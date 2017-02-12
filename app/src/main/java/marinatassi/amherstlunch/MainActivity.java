@@ -15,9 +15,11 @@ public class MainActivity extends AppCompatActivity {
     public final static String PW = "test";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        GetVal getV = new GetVal();
+        getV.execute();
     }
 
     public void keyboardAdjust(View view){
