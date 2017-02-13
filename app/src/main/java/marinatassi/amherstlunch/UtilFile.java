@@ -25,6 +25,7 @@ public class UtilFile extends MainActivity{
     public static File getFile(String filename, Context context) throws IOException{
         File path = context.getExternalFilesDir(null);
         File file = new File(path, filename);
+        System.out.println(file);
         file.createNewFile();
         return file;
     }

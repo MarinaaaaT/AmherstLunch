@@ -1,14 +1,24 @@
 package marinatassi.amherstlunch;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
@@ -20,8 +30,6 @@ import java.util.Date;
  * Created by Marina on 2/6/17.
  */
 public class Registration extends AppCompatActivity {
-
-    private Uri file;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +45,61 @@ public class Registration extends AppCompatActivity {
 
         username.setText(UN);
         password.setText(PW);
+    }
+
+    String mCurrentPhotoPath;
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
+    static final int REQUEST_TAKE_PHOTO = 1;
+
+    public void dispatchTakePictureIntent(View view) {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+                System.out.println("ERROR");
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                String photoPath = photoFile.getAbsolutePath();
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoPath);
+                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+            }
+        }
+    }
+
+    public void hideError(View view){
+
+        TextView UN1 = (TextView) findViewById(R.id.ErrorUN1);
+        UN1.setVisibility(View.INVISIBLE);
+
+        TextView UN2 = (TextView) findViewById(R.id.ErrorUN2);
+        UN2.setVisibility(View.INVISIBLE);
+
+        TextView PW = (TextView) findViewById(R.id.ErrorPW);
+        PW.setVisibility(View.INVISIBLE);
+
+
     }
 
     public void register(View view) throws IOException {
@@ -75,44 +138,6 @@ public class Registration extends AppCompatActivity {
             UtilFile.writeToFile(userData, userInfo);
             homeOpen();
         }
-    }
-
-    public void takePicture(View view) {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        file = Uri.fromFile(getOutputMediaFile());
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, file);
-
-        startActivityForResult(intent, 100);
-    }
-
-    private static File getOutputMediaFile() {
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "CameraDemo");
-
-        if (!mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
-                Log.d("CameraDemo", "failed to create directory");
-                return null;
-            }
-        }
-
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        return new File(mediaStorageDir.getPath() + File.separator +
-                "IMG_" + timeStamp + ".jpg");
-    }
-
-    public void hideError(View view){
-
-        TextView UN1 = (TextView) findViewById(R.id.ErrorUN1);
-        UN1.setVisibility(View.INVISIBLE);
-
-        TextView UN2 = (TextView) findViewById(R.id.ErrorUN2);
-        UN2.setVisibility(View.INVISIBLE);
-
-        TextView PW = (TextView) findViewById(R.id.ErrorPW);
-        PW.setVisibility(View.INVISIBLE);
-
-
     }
 
     public void homeOpen(){

@@ -102,13 +102,15 @@
         android:layout_marginBottom="15dp"
         />
 
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/Name"
         android:id="@+id/Picture"
         android:text="Profile \nPicture"
-        android:onClick="takePicture" />
+        android:onClick="dispatchTakePictureIntent" />
+
 
     <Button
         android:id="@+id/Finish"
