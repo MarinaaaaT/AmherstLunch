@@ -79,16 +79,19 @@ public class GetVal extends AsyncTask<String[], Void, String[]> {
                 params[0][foodCount] = params[0][foodCount] + ":\n" + i.text();
                 foodCount++;
             }
+            return params[0];
         }
         catch(IOException e){
             //do nothing
             System.out.println("FILE NOT FOUND EXCEPTION");
+            return null;
         }
-        return params[0];
     }
 
     @Override
     protected void onPostExecute(String[] strings) {
+        System.out.println("FINISHED");
+        super.onPostExecute(strings);
         DiningMenu.valFood = strings;
     }
 }

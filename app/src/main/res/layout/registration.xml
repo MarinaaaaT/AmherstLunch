@@ -103,10 +103,18 @@
         />
 
     <Button
-        android:id="@+id/Finish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/Name"
+        android:id="@+id/Picture"
+        android:text="Profile \nPicture"
+        android:onClick="takePicture" />
+
+    <Button
+        android:id="@+id/Finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Picture"
         android:layout_alignRight="@id/Name"
         android:text="Finish"
         android:onClick="register"

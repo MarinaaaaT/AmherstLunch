@@ -12,10 +12,14 @@ import android.view.ViewGroup;
  */
 public class HomePage extends AppCompatActivity {
 
+    public static String[] valFood1;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
         Intent intent = getIntent();
+        GetVal val = new GetVal();
+        val.execute(valFood1);
     }
 
     public void menuOpen(View view){

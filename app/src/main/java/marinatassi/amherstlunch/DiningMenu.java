@@ -26,16 +26,16 @@ public class DiningMenu extends AppCompatActivity {
         Intent intent = getIntent();
         GetVal val = new GetVal();
         val.execute(valFood);
+
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             System.out.println("Interrupted");
         }
-        System.out.println(valFood[0]);
+
         if(valFood == null){
             System.out.println("YOUR INTERNET CONNECTION IS THE PROBLEM! I was having this error earlier.");
         }
-        //System.out.println(valFood[0]);
 
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.Food);
